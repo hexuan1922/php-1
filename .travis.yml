@@ -1,0 +1,31 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.8.1
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - chmod +x /usr/local/bin/docker-compose
+
+  - docker version
+
+  - docker build --no-cache -t m9rco/php:5.6 -f 5.6/Dockerfile 5.6/
+  - docker build --no-cache -t m9rco/php:5.6-dev -f 5.6/Dockerfile.dev 5.6/
+
+  - docker build --no-cache -t m9rco/php:7.1 -f 7.1/Dockerfile 7.1/
+  - docker build --no-cache -t m9rco/php:7.1-dev -f 7.1/Dockerfile.dev 7.1/
+
+  - docker run --name php5.6 -d -v $PWD:/app m9rco/php:5.6
+  - docker run --name php5.6-dev -d -v $PWD:/app m9rco/php:5.6-dev
+
+  - docker run --name php7.1 -d -v $PWD:/app m9rco/php:7.1
+  - docker run --name php7.1-dev -d -v $PWD:/app m9rco/php:7.1-dev
+
+script:
+  - docker exec php5.6-dev sh -c "apk -V"
+  - docker exec php7.1-dev sh -c "apk -V"
