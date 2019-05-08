@@ -32,3 +32,5 @@ docker run -it -v $(pwd):/app/ --name php m9rco/php:5.6 sh
 
 - [5.6](5.6)
 - [7.1](7.1)
+- [7.2](7.2)
+- [7.3](7.3)
