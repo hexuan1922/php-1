@@ -1,4 +1,4 @@
-FROM m9rco/alpine-php:7.2
+FROM m9rco/php:7.2
 
 ARG USER=root
 ARG PASSWORD=root
