@@ -3,6 +3,7 @@ FROM m9rco/alpine:3.5
 LABEL maintainer="m9rco <pushaowei0727@gmail.com>"
 
 RUN apk add -U --no-cache \
+    # Packages
     tini \
     php5 \
     php5-apcu \
@@ -30,7 +31,7 @@ RUN apk add -U --no-cache \
     php5-zlib \
     php5-fpm \
     php5-mcrypt \
-
+    # Clean up
     && rm -rf /var/cache/apk/*
 
 ADD rootfs /
