@@ -1,19 +1,6 @@
 FROM m9rco/alpine:3.8
 
 LABEL maintainer="m9rco <pushaowei0727@gmail.com>"
-ENV TIME_ZONE PRC
-
-
-# ------------------------- 设置时区
-RUN apk add --no-cache -U tzdata \
-    && ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime \
-    && echo "${TIME_ZONE}" > /etc/timezone
-
-
-# ------------------------- 镜像源转到中国科技大学
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-      && apk update
-
 RUN apk add -U \
 	# Packages
     tini \
